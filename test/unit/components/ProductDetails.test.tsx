@@ -3,7 +3,7 @@ import {render, screen} from '@testing-library/react';
 import {ProductItem} from "../../../src/client/components/ProductItem";
 import {createWrapper} from "../mock/createWrapper";
 import {ProductDetails} from "../../../src/client/components/ProductDetails";
-import {userEvent} from "@testing-library/user-event/setup/index";
+import {userEvent} from "@testing-library/user-event";
 import {axiosMock} from "../mock/axiosMock";
 
 describe('ProductDetails', () => {

@@ -72,4 +72,64 @@ describe('page/Application', () => {
 
         waitFor(() => expect(contactsLink.parentElement.parentElement.classList.contains('collapse')).toBe(true))
     })
+
+    it('По роуту /contacts отрисовалась страница Contacts', async () => {
+        const wrapper = createWrapper({
+            route: '/contacts',
+            routerEntries: ['/contacts']
+        })
+        render(<Application/>, {wrapper});
+
+
+        const contactsHeader = await screen.findByText('Contacts')
+        expect(contactsHeader).toBeInTheDocument()
+    })
+
+    it('По роуту /home отрисовалась страница Home', async () => {
+        const wrapper = createWrapper({
+            route: '/',
+            routerEntries: ['/']
+        })
+        render(<Application/>, {wrapper});
+
+
+        const header = await screen.findByText('Welcome to Kogtetochka store!')
+        expect(header).toBeInTheDocument()
+    })
+
+    it('По роуту /catalog отрисовалась страница Catalog', async () => {
+        const wrapper = createWrapper({
+            route: '/catalog',
+            routerEntries: ['/catalog']
+        })
+        render(<Application/>, {wrapper});
+
+
+        const header = await screen.findByText('Catalog')
+        expect(header).toBeInTheDocument()
+    })
+
+    it('По роуту /delivery отрисовалась страница Delivery', async () => {
+        const wrapper = createWrapper({
+            route: '/delivery',
+            routerEntries: ['/delivery']
+        })
+        render(<Application/>, {wrapper});
+
+
+        const header = await screen.findByText('Delivery')
+        expect(header).toBeInTheDocument()
+    })
+
+    it('По роуту /cart отрисовалась страница Cart', async () => {
+        const wrapper = createWrapper({
+            route: '/cart',
+            routerEntries: ['/cart']
+        })
+        render(<Application/>, {wrapper});
+
+
+        const header = await screen.findByText('Cart')
+        expect(header).toBeInTheDocument()
+    })
 });
