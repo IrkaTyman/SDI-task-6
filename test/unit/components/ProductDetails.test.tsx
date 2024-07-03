@@ -1,10 +1,8 @@
 import React from 'react'
 import {render, screen} from '@testing-library/react';
-import {ProductItem} from "../../../src/client/components/ProductItem";
 import {createWrapper} from "../mock/createWrapper";
 import {ProductDetails} from "../../../src/client/components/ProductDetails";
 import {userEvent} from "@testing-library/user-event";
-import {axiosMock} from "../mock/axiosMock";
 
 describe('ProductDetails', () => {
     const wrapper = createWrapper({})
@@ -20,7 +18,7 @@ describe('ProductDetails', () => {
                 color: 'Color'
             }}/>, {wrapper});
 
-        const component = await screen.findByText('Name');
+        const component = await screen.findByText('Product');
 
         expect(component).toBeInTheDocument();
     });
@@ -29,19 +27,19 @@ describe('ProductDetails', () => {
         render(<ProductDetails
             product={{
                 id: 1,
-                name: 'Product',
+                name: 'Product 1',
                 price: 100,
-                description: 'Description',
-                material: 'Material',
-                color: 'Color'
+                description: 'Description 1',
+                material: 'Material 1',
+                color: 'Color 1'
             }}/>, {wrapper});
 
-        const name = await screen.findByText('Product')
+        const name = await screen.findByText('Product 1')
         const price = await screen.findByText('$100')
-        const description = await screen.findByText('Description')
-        const material = await screen.findByText('Material')
-        const color = await screen.findByText('Color')
-        const cartButton = await screen.findByText('Add To Cart')
+        const description = await screen.findByText('Description 1')
+        const material = await screen.findByText('Material 1')
+        const color = await screen.findByText('Color 1')
+        const cartButton = await screen.findByText('Add to Cart')
 
         expect(name).toBeInTheDocument();
         expect(price).toBeInTheDocument();
@@ -62,9 +60,9 @@ describe('ProductDetails', () => {
                 color: 'Color'
             }}/>, {wrapper});
 
-        const itemToCart = await screen.findByText('Item in cart')
+        const itemToCart = screen.queryByText('Item in cart')
 
-        expect(itemToCart).toBeInDocument();
+        expect(itemToCart).not.toBeInTheDocument();
     })
 
     it('После добавления товара в корзину отображается CartBadge', async () => {
@@ -78,12 +76,12 @@ describe('ProductDetails', () => {
                 color: 'Color'
             }}/>, {wrapper});
 
-        const cartButton = await screen.findByText('Add To Cart')
+        const cartButton = await screen.findByText('Add to Cart')
 
         await userEvent.click(cartButton)
 
         const itemToCart = await screen.findByText('Item in cart')
 
-        expect(itemToCart).toBeInDocument();
+        expect(itemToCart).toBeInTheDocument();
     });
 });
