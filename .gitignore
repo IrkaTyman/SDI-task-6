@@ -6,3 +6,5 @@ Dockerfile
 .DS_Store
 html-report
 .idea
+
+/test/testplane/report
