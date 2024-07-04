@@ -1,13 +1,13 @@
 import express from 'express';
 import { router } from './routes';
 
-const port = Number(process.env.PORT) || 3004;
+const port = Number(process.env.PORT) || 3003;
 const basename = '/hw/store';
 
 const app = express();
 
 app.use(express.json());
-app.use(basename, express.static('dist'));
+app.use(basename, express.static('dist', { index: false }));
 app.use(basename, router);
 
 app.listen(port, '::', () => {

@@ -2,7 +2,7 @@ import {basenameTest} from "./test/unit/mock/ReduxWrapper";
 
 export default {
     gridUrl: "http://localhost:4444/wd/hub",
-    baseUrl: `http://localhost:3000/hw/store`,
+    baseUrl: `http://localhost:3003/hw/store`,
     pageLoadTimeout: 0,
     httpTimeout: 60000,
     testTimeout: 90000,
