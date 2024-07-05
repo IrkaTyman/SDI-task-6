@@ -2,8 +2,8 @@
   "name": "autotests-hw",
   "version": "1.0.0",
   "scripts": {
-    "start": "nodemon ./src/server/index.ts",
-    "test": "jest",
+    "start": "set \"BUG_ID=0\" && nodemon ./src/server/index.ts",
+    "test": "set \"BUG_ID=0\" && jest",
     "build": "webpack --mode=production --node-env=production",
     "watch": "webpack --watch"
   },

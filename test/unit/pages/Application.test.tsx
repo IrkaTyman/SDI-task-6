@@ -6,7 +6,10 @@ import {resizeWindow} from "../lib/resizeWindow";
 import {userEvent} from "@testing-library/user-event";
 
 describe('page/Application', () => {
-    const wrapper = createWrapper({})
+    const wrapper = createWrapper({
+        route: '/contacts',
+        routerEntries: ['/contacts']
+    })
 
     it('Отобразились навигационные ссылки: Home, Contacts, Delivery, Catalog, Cart с верными ссылками', async () => {
         render(<Application/>, {wrapper});
@@ -55,7 +58,6 @@ describe('page/Application', () => {
 
         const hamburger = await screen.findByLabelText('Toggle navigation')
         await userEvent.click(hamburger)
-
         expect(contactsLink.parentElement.parentElement.classList.contains('collapse')).toBe(false);
     })
 
@@ -70,7 +72,9 @@ describe('page/Application', () => {
 
         await userEvent.click(contactsLink)
 
-        waitFor(() => expect(contactsLink.parentElement.parentElement.classList.contains('collapse')).toBe(true))
+        await waitFor(() =>
+            expect(contactsLink.parentElement.parentElement.classList.contains('collapse')).toBe(true)
+        )
     })
 
     it('По роуту /contacts отрисовалась страница Contacts', async () => {
