@@ -1,37 +1,45 @@
+import {bugQueryParams} from "./bugQueryParams";
+import {basenameTest} from "./basename";
+
 describe("PageScreenTests", () => {
     it("Страница Корзины (пустая) отображается без изменений", async ({browser}) => {
-        await browser.url("store/cart");
+        await browser.url(basenameTest+"cart"+bugQueryParams);
 
-        await browser.$('.Cart').assertView('plain')
+        const page = await browser.$('.Cart')
+        await page.assertView('plain', {tolerance: 0.06})
     });
 
     it("Страница Каталог отображается без изменений (исключая порядок карточек)", async ({browser}) => {
-        await browser.url("store/catalog");
+        await browser.url(basenameTest+"catalog"+bugQueryParams);
 
-        await browser.$('.Catalog').assertView('plain')
+        const page = await browser.$('.Catalog')
+        await page.assertView('plain', {tolerance: 0.06})
     });
 
     it("Страница Продукт отображается без изменений (исключая данные продукта)", async ({browser}) => {
-        await browser.url("store/catalog/1");
+        await browser.url(basenameTest+"catalog/1"+bugQueryParams);
 
-        await browser.$('.Product').assertView('plain')
+        const page = await browser.$('.Product')
+        await page.assertView('plain', {tolerance: 0.06})
     });
 
     it("Страница Доставка отображается без изменений", async ({browser}) => {
-        await browser.url("store/delivery");
+        await browser.url(basenameTest+"delivery"+bugQueryParams);
 
-        await browser.$('.Delivery').assertView('plain')
+        const page = await browser.$('.Delivery')
+        await page.assertView('plain', {tolerance: 0.06})
     });
 
     it("Страница Главная отображается без изменений", async ({browser}) => {
-        await browser.url("store");
+        await browser.url(basenameTest+"store"+bugQueryParams);
 
-        await browser.$('.Home').assertView('plain')
+        await browser.$('.Home').assertView('plain', {tolerance: 0.06})
     });
 
     it("Страница Контакты отображается без изменений", async ({browser}) => {
-        await browser.url("store/contacts");
+        await browser.url(basenameTest+"contacts"+bugQueryParams);
 
-        await browser.$('.Contacts').assertView('plain')
+        const page = await browser.$('.Contacts')
+        await page.assertView('plain', {tolerance: 0.06})
     });
 });

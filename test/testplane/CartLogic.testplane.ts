@@ -1,6 +1,9 @@
+import {bugQueryParams} from "./bugQueryParams";
+import {basenameTest} from "./basename";
+
 describe("CartLogic", () => {
     it("Добавление в корзину изменяет заголовок корзины", async ({browser}) => {
-        await browser.url("store/catalog/1");
+        await browser.url(basenameTest+"catalog/1"+bugQueryParams);
 
         const addCartButton = await browser.$('.btn')
 
@@ -21,7 +24,7 @@ describe("CartLogic", () => {
     });
 
     it("При повторном добавлении товара в заголовке корзины не изменяется количество", async ({browser}) => {
-        await browser.url("store/catalog/1");
+        await browser.url(basenameTest+"catalog/1"+bugQueryParams);
 
         const addCartButton = await browser.$('.btn')
 
@@ -44,7 +47,7 @@ describe("CartLogic", () => {
     });
 
     it("После добавления товара 2 раза на странице корзины появляется таблица товаров с верным кол-вом и кнопка Очистить корзину", async ({browser}) => {
-        await browser.url("store/catalog/1");
+        await browser.url(basenameTest+"catalog/1"+bugQueryParams);
 
         const addCartButton = await browser.$('.btn')
 
@@ -54,9 +57,9 @@ describe("CartLogic", () => {
 
         await addCartButton.click()
 
-        await browser.url("store/cart");
+        await browser.url(basenameTest+"cart"+bugQueryParams);
 
-        const count = await browser.$('.Table .Count')
+        const count = await browser.$('.Cart-Table .Cart-Count')
 
         const clearButton = await browser.$('.Cart-Clear')
 
@@ -67,7 +70,7 @@ describe("CartLogic", () => {
     });
 
     it("После добавления товара и при очищении корзины страница вновь пустая", async ({browser}) => {
-        await browser.url("store/catalog/1");
+        await browser.url(basenameTest+"catalog/1"+bugQueryParams);
 
         const addCartButton = await browser.$('.btn')
 
@@ -75,7 +78,7 @@ describe("CartLogic", () => {
 
         await addCartButton.click()
 
-        await browser.url("store/cart");
+        await browser.url(basenameTest+"cart"+bugQueryParams);
 
         const clearButton = await browser.$('.Cart-Clear')
 
@@ -83,7 +86,7 @@ describe("CartLogic", () => {
 
         await clearButton.click()
 
-        const text = await browser.$('.col').getText()
+        const text = await browser.$('.col')
 
         await text.waitForDisplayed()
 
@@ -91,7 +94,7 @@ describe("CartLogic", () => {
     });
 
     it("После добавления товара отображается название, цена, количество, стоимость и общая сумма", async ({browser}) => {
-        await browser.url("store/catalog/1");
+        await browser.url(basenameTest+"catalog/1"+bugQueryParams);
 
         const addCartButton = await browser.$('.btn')
 
@@ -100,17 +103,17 @@ describe("CartLogic", () => {
         await addCartButton.click()
         await addCartButton.click()
 
-        await browser.url("store/cart");
+        await browser.url(basenameTest+"cart"+bugQueryParams);
 
-        const name = await browser.$('.Table .Name')
+        const name = await browser.$('.Cart-Table .Cart-Name')
 
-        const price = await browser.$('.Table .Price')
+        const price = await browser.$('.Cart-Table .Cart-Price')
 
-        const count = await browser.$('.Table .Count')
+        const count = await browser.$('.Cart-Table .Cart-Count')
 
-        const total = await browser.$('.Table .Total')
+        const total = await browser.$('.Cart-Table .Cart-Total')
 
-        const orderPrice = await browser.$('.OrderPrice')
+        const orderPrice = await browser.$('.Cart-OrderPrice')
 
         await name.waitForDisplayed()
 
@@ -122,7 +125,7 @@ describe("CartLogic", () => {
     });
 
     it("После добавления товара на карточке и странице товара отображается CartBadge", async ({browser}) => {
-        await browser.url("store/catalog/0");
+        await browser.url(basenameTest+"catalog/0"+bugQueryParams);
 
         const addCartButton = await browser.$('.btn')
 
@@ -132,7 +135,7 @@ describe("CartLogic", () => {
 
         const productPageBadge = await browser.$('.text-success')
 
-        await browser.url("store/catalog");
+        await browser.url(basenameTest+"catalog"+bugQueryParams);
 
         const badges = await Promise.all(
             await browser.$$('.card').map(card => card.$('.text-success'))
@@ -145,7 +148,7 @@ describe("CartLogic", () => {
     });
 
     it("После добавления товара и перезагрузки корзина сохранилась", async ({browser}) => {
-        await browser.url("store/catalog/1");
+        await browser.url(basenameTest+"catalog/1"+bugQueryParams);
 
         const addCartButton = await browser.$('.btn')
 
@@ -155,9 +158,9 @@ describe("CartLogic", () => {
 
         await browser.refresh()
 
-        await browser.url("store/cart");
+        await browser.url("store/cart"+bugQueryParams);
 
-        const count = await browser.$('.Table .Count')
+        const count = await browser.$('.Cart-Table .Cart-Count')
 
         const clearButton = await browser.$('.Cart-Clear')
 

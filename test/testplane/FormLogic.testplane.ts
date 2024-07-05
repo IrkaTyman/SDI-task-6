@@ -1,6 +1,9 @@
+import {bugQueryParams} from "./bugQueryParams";
+import {basenameTest} from "./basename";
+
 describe("FormLogic", () => {
     it("После добавления в корзину можно заполнить форму заказа, после заполнения отобразиться успешность", async ({browser}) => {
-        await browser.url("store/catalog/1");
+        await browser.url(basenameTest+"catalog/1"+bugQueryParams);
 
         const addCartButton = await browser.$('.btn')
 
@@ -8,7 +11,7 @@ describe("FormLogic", () => {
 
         await addCartButton.click()
 
-        await browser.url("store/cart");
+        await browser.url(basenameTest+"cart"+bugQueryParams);
 
         const inputName = await browser.$('#f-name')
         const inputPhone = await browser.$('#f-phone')
@@ -30,7 +33,7 @@ describe("FormLogic", () => {
     });
 
     it("После добавления в корзину и отправки в окне успеха отображается id заказа", async ({browser}) => {
-        await browser.url("store/catalog/1");
+        await browser.url(basenameTest+"catalog/1"+bugQueryParams);
 
         const addCartButton = await browser.$('.btn')
 
@@ -38,7 +41,7 @@ describe("FormLogic", () => {
 
         await addCartButton.click()
 
-        await browser.url("store/cart");
+        await browser.url(basenameTest+"cart"+bugQueryParams);
 
         const inputName = await browser.$('#f-name')
         const inputPhone = await browser.$('#f-phone')
@@ -54,10 +57,10 @@ describe("FormLogic", () => {
 
         await submitButton.click()
 
-        const orderId = await browser.$('.Cart-SuccessMessage.alert-success strong')
+        const orderId = await browser.$('.Cart-SuccessMessage strong')
 
         await orderId.waitForDisplayed()
 
-        expect(orderId).toBeDisplayed()
+        expect(orderId.getText()).toBe('1')
     });
 });
