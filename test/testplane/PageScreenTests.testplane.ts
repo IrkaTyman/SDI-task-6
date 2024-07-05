@@ -31,7 +31,7 @@ describe("PageScreenTests", () => {
     });
 
     it("Страница Главная отображается без изменений", async ({browser}) => {
-        await browser.url(basenameTest+"store"+bugQueryParams);
+        await browser.url(basenameTest+bugQueryParams);
 
         await browser.$('.Home').assertView('plain', {tolerance: 0.06})
     });
