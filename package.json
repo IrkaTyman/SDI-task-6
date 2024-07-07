@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "set \"BUG_ID=0\" && nodemon ./src/server/index.ts",
-    "test": "set \"BUG_ID=10\" && jest",
+    "test": "set \"BUG_ID=0\" && jest",
     "build": "webpack --mode=production --node-env=production",
     "watch": "webpack --watch"
   },

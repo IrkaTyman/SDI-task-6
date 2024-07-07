@@ -1,1 +1,1 @@
-export const bugQueryParams = '?bug_id=3'
+export const bugQueryParams = '?bug_id=0'
